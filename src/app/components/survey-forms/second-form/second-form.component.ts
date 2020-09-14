@@ -16,11 +16,22 @@ export class SecondFormComponent implements OnInit, OnDestroy {
   userDetails: userData;
   submitted = false;
   $unsubscribe = new Subject();
+  basicData:any;
+  residents:number;
+  i = Array;
 
   constructor(private formBuilder:FormBuilder, private apiService:ApiService) { }
 
   ngOnInit(): void {
+    this.basicData = this.apiService.getFirstData();
+    if(this.basicData.source._value && (this.basicData.source._value.noOfPeople > 0)){
+      this.residents = this.basicData.source._value.noOfPeople;
+    }else{
+      this.residents = 3; //TODO
+    }
+    
     this.showSpinner=false;
+    
     this.userForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
@@ -44,6 +55,10 @@ export class SecondFormComponent implements OnInit, OnDestroy {
       this.apiService.setFirstData(this.userDetails);
     }
 
+  }
+
+  saveToSession(){
+    console.log("save to session");
   }
 
 }

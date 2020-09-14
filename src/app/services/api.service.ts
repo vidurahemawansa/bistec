@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
+  userData = new BehaviorSubject({})// to store data which is using another component
   constructor(private http:HttpClient) { }
 
   userLogin(name) {
@@ -28,11 +28,11 @@ export class ApiService {
   cookieValue:string = "false";
 
   setFirstData(userDetails:any){
-    console.log(userDetails);
+    this.userData.next(userDetails);
   }
 
   getFirstData(){
-    
+    return this.userData.asObservable();
   }
 
 }

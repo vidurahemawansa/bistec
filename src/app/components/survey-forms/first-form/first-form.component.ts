@@ -3,6 +3,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { userData } from '../../../models/user.details';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class FirstFormComponent implements OnInit, OnDestroy {
   submitted = false;
   $unsubscribe = new Subject();
 
-  constructor(private formBuilder:FormBuilder, private apiService:ApiService) { }
+  constructor(private formBuilder:FormBuilder, private apiService:ApiService, private router:Router) { }
 
   ngOnInit(): void {
     this.showSpinner=false;
@@ -42,15 +43,17 @@ export class FirstFormComponent implements OnInit, OnDestroy {
     this.submitted = true;
     // stop if the form not validated
     if (this.userForm.invalid) {
-      return;
+      this.showSpinner=false;
+      window.scrollTo(0, 0);
+      return;      
     } else {
       this.userDetails = this.userForm.value;
       this.apiService.setFirstData(this.userDetails);
+      this.router.navigateByUrl('person');
     }
   }
 
   saveToSession(){
     console.log("save to session");
   }
-
 }

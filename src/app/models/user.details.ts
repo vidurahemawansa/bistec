@@ -1,3 +1,6 @@
 export interface userData{
-  name: number
+  noOfPeople: number,
+  otherPeople: any,
+  ownedBy:string,
+  telephone: string
 }

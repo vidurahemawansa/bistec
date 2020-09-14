@@ -1,0 +1,157 @@
+@import '../../../../init';
+
+.form-wrapper{
+    .title-wrapper{
+        background: $darkBg;
+        margin: 0;
+        padding: 0 15px;
+        color: #fff;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        h2{
+            font-size: 1.7em;
+            text-transform: uppercase;
+            line-height: 40px;
+            margin: 0;
+        }
+        .fill-later{
+            background: $secondBtn;
+            margin: 5px 0;
+        }
+    }
+    .guide{
+        font-size: 1.1em;
+        margin: 40px 0 0;
+        p{
+            margin: 15px 5px 20px 0;
+            &::after{
+                content: "";
+                border-bottom: 2px solid #ccc;
+                width: 40px;
+                margin: 2px 0px 0 5px;
+                display: inline-block;
+                vertical-align: middle;
+                visibility: visible;
+            }
+            &.last::after{
+                width: 0;
+            }
+            span{
+                margin: 2px 0 0;
+                &.material-icons{
+                    background: $themeBlue;
+                    color: #fff;
+                    border-radius: 50%;
+                    padding: 5px;
+                    font-size: 15px;
+                    margin: 0 10px 0 0;
+                }
+            }
+            &.inactive{
+                span{
+                    color: $inactiveFont;
+                    &.material-icons{
+                        background: $inactiveFont;
+                        color: #fff;
+                    }
+                }
+            }      
+        }
+    }
+    .inner-wrapper{
+        background: #fff;
+        padding: 10px 15px;
+        border: 1px solid #eee;
+        .info{
+            font-size: 1.2em;
+            color: #000;
+        }
+        ol {
+            list-style: none;
+            counter-reset: item;
+            margin: 0;
+            padding: 0;
+            li {
+                counter-increment: item;
+                margin: 10px 0 25px;
+                font-size: 1.1em;
+                &::before{
+                    margin-right: 10px;
+                    content: counter(item);
+                    border-radius: 100%;
+                    color: $themeBlue;
+                    width: 25px;
+                    text-align: center;
+                    font-size: 15px;
+                    border:1px solid;
+                    float: left;
+                }
+                .main-lbl{
+                    float: left;
+                    width: calc(100% - 50px);
+                    color: $darkFont;
+                    .required{
+                        color: #ff0000;
+                        font-size: 1.5em;
+                        margin: 0 2px 0 0;
+                        line-height: 19px;
+                    }
+                }
+                input{
+                    display: block;
+                    margin: 0 0 0 35px;
+                    height: 38px;
+                    padding: 0 0 0 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    &.checkbox{
+                        float: left;
+                        width: 20px;
+                        height: 20px;
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+                .field-lbl{
+                    margin: 0 0 12px 35px;
+                    display: block;
+                    line-height: 16px;               
+                    span{
+                        width: calc(100% - 70px);
+                        margin: 1px 0 0 10px;
+                        font-family: $regFont;
+                    }
+                }
+                .error-msgs{
+                    padding: 0 0 0 35px;
+                    color: #ff0000;
+                }
+            }
+        }
+    }
+    .btn-wrapper{
+        margin: 0 -15px;
+        padding: 10px 15px 12px;
+        background: #e9e9e9;
+        border-top: 1px solid #c2c2c2;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .form-wrapper{
+        .btn{
+            float: none;
+            width: 100%;
+            margin: 0 auto 20px;
+            &.fill-later{
+                width: auto;
+                float: right;
+            }
+            &.btn-reset{
+                margin: 0 auto;
+            }
+        }
+    }
+}
