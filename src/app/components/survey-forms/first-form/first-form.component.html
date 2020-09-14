@@ -1,0 +1,79 @@
+<div class="form-wrapper first-form">
+    <div class="title-wrapper clear-a">
+        <h2 class="float-l">Census 2020</h2>
+        <button type="button" (click)="saveToSession()" class="btn fill-later float-r">Fill later</button>
+    </div>
+    <div class="clear-a guide">
+        <p class="float-l clear-a"><span class="material-icons float-l">edit</span><span class="float-l">Basic Info</span></p>
+        <p class="float-l clear-a inactive last"><span class="material-icons float-l">edit</span><span class="float-l">Resident Details</span></p>
+    </div>
+    <div class="inner-wrapper">
+        
+        <form [formGroup]="userForm" class="user-form" (ngSubmit)="submitForm()">
+            <ol>
+                <li class="form-group">
+                    <label class="main-lbl" for="noOfPeople"><span class="required">*</span>How many people were living or staying in this house, apartment or mobile home on April 1, 2020?</label>
+                    <input type="number" formControlName="noOfPeople" placeholder="Ex:- 3" />
+                    <div class="error-msgs" *ngIf="submitted && userData.noOfPeople.errors">
+                        <div *ngIf="userData.noOfPeople.errors.required">This field is required.</div>
+                    </div>
+                </li>
+                <li class="form-group">
+                    <label class="main-lbl" for="noofpeople">Were there any additional people staying here on April 1, 2020 that you did not include in question 1?</label>
+                    <label class="field-lbl clear-a">
+                        <input type="checkbox" name="children" class="float-l checkbox" formControlName="otherPeople" />
+                        <span class="float-l">Children, related or unrelated, such as newborn babies, grandchildren, or foster children</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="checkbox" name="relatives" class="float-l checkbox" formControlName="otherPeople" />
+                        <span class="float-l">Relatives, such as adult children, cousins, or in-laws</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="checkbox" class="float-l checkbox" formControlName="otherPeople" />
+                        <span class="float-l">Nonrelatives, such as roommates or live-in babysitters</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="checkbox" class="float-l checkbox" formControlName="otherPeople" />
+                        <span class="float-l">People staying here temporarily</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="checkbox" class="float-l checkbox" formControlName="otherPeople" />
+                        <span class="float-l">No additional people</span>
+                    </label>
+                </li>
+                <li class="form-group">
+                    <label class="main-lbl">Is this house, apartment, or mobile home </label>
+                    <label class="field-lbl clear-a">
+                        <input type="radio" class="float-l checkbox" formControlName="ownedBy" value="Owned by you or someone in this household with a mortgage or loan Include home equity loans"/>
+                        <span class="float-l">Owned by you or someone in this household with a mortgage or loan? Include home equity loans.</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="radio"  class="float-l checkbox" formControlName="ownedBy" value="Owned by you or someone in this household free and clear (without a mortgage or loan)"/>
+                        <span class="float-l">Owned by you or someone in this household free and clear (without a mortgage or loan)?</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="radio" class="float-l checkbox" formControlName="ownedBy" value="Rented"/>
+                        <span class="float-l">Rented?</span>
+                    </label>
+                    <label class="field-lbl clear-a">
+                        <input type="radio" class="float-l checkbox" formControlName="ownedBy" value="Occupied without payment of rent"/>
+                        <span class="float-l">Occupied without payment of rent?</span>
+                    </label>
+                </li>
+                <li class="form-group">
+                    <label class="main-lbl">What is your telephone number?</label>
+                    <input type="tel" formControlName="telephone" placeholder="Ex:- 01548752554" />
+                </li>
+            </ol>   
+    
+            <div class="form-group btn-wrapper clear-a">
+                <button type="submit" class="btn btn-primary float-r">Fill resident details<span class="material-icons">navigate_next</span></button>
+                <button type="reset" class="btn btn-reset float-l">Reset<span class="material-icons">cached</span></button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="spinner-overlay" *ngIf="showSpinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

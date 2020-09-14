@@ -1,0 +1,25 @@
+<div class="form-wrapper first-form">
+    <div class="title-wrapper clear-a">
+        <h2 class="float-l">Census 2020</h2>
+        <button class="btn fill-later float-r">Fill later</button>
+    </div>
+    
+    <form [formGroup]="userForm" class="user-form" (ngSubmit)="submitForm()">
+        <ol>
+            <li class="form-group">
+                <input type="text" formControlName="name" placeholder="User name" />
+                <div *ngIf="submitted && userData.name.errors">
+                    <div *ngIf="userData.name.errors.required">First Name is required</div>
+                </div>
+            </li>
+        </ol>
+
+
+        <div class="form-group">
+            <button class="btn btn-primary">Login</button>
+        </div>
+    </form>
+    <div class="spinner-overlay" *ngIf="showSpinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

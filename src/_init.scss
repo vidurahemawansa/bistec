@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'helveticaneuebold';
+    src: url('./assets/fonts/helvetica_neu_bold-webfont.woff2') format('woff2'),
+         url('./assets/fonts/helvetica_neu_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'helveticaneuemedium';
+    src: url('./assets/fonts/helveticaneue_medium-webfont.woff2') format('woff2'),
+         url('./assets/fonts/helveticaneue_medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helveticaneueregular';
+    src: url('./assets/fonts/helveticaneue-webfont.woff2') format('woff2'),
+         url('./assets/fonts/helveticaneue-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('./assets/fonts/OpenSans-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$regFont: 'open_sansregular', sans-serif;
+$medFont: 'helveticaneuemedium', sans-serif;
+$boldFont: 'helveticaneuebold', sans-serif;
+$lightFont: #626262;
+$darkFont: #484848;
+$darkBg:#464646;
+$primeTheme:#009344;
+$secondBtn:#02b875;
+$inactiveFont:#bebebe;
+$themeBlue: #007ce6;
+$darkBlue: #002bff;
