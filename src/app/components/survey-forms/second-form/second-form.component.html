@@ -4,33 +4,61 @@
         <button type="button" (click)="saveToSession()" class="btn fill-later float-r">Fill later</button>
     </div>
     <div class="clear-a guide">
-        <p class="float-l clear-a"><span class="material-icons float-l">edit</span><span class="float-l">Basic Info</span></p>
-        <p class="float-l clear-a inactive last"><span class="material-icons float-l">edit</span><span class="float-l">Resident Details</span></p>
+        <p class="float-l clear-a inactive"><span class="material-icons float-l">edit</span><span class="float-l">Basic
+                Info</span></p>
+        <p class="float-l clear-a last"><span class="material-icons float-l">edit</span><span
+                class="float-l">Person {{currentItem+1}}</span></p>
     </div>
     <div class="inner-wrapper">
-        <p class="info">Please provide information for each person living here. If there is someone 
+        <p *ngIf="currentItem==0" class="info">Please provide information for each person living here. If there is someone
             living here who pays the rent or owns this residence, start by listing him or her
-             as Person 1. If the owner or the person who pays the rent does not live here, start by 
-             listing any adult living here as Person 1.</p>
-        <form [formGroup]="userForm" class="user-form" (ngSubmit)="submitForm()">
+            as Person 1. If the owner or the person who pays the rent does not live here, start by
+            listing any adult living here as Person 1.</p>
+        <div class="form-set-wrapper" *ngFor="let j of i(residents); let x=index; last as isLast">
+            <form *ngIf="x==currentItem" [formGroup]="userForm" class="user-form" (ngSubmit)="submitForm()">
+                <h3 class="person">Person {{x+1}}</h3>
+                <ol>
+                    <li class="form-group">
+                        <label class="main-lbl">What is Person {{x+1}}'s name?</label>
+                        <div class="clear-a names-wrapper">
+                            <div class="float-l lbl-wrapper">
+                                <label class="field-lbl">First name</label>
+                                <input type="text" formControlName="firstName" placeholder="Enter first name" />
+                                <div class="error-msgs" *ngIf="submitted && userData.firstName.errors">
+                                    <div *ngIf="userData.firstName.errors.required">This field is required.</div>
+                                </div>
+                            </div>
+                            <div class="float-l lbl-wrapper">
+                                <label class="field-lbl">Last name</label>
+                                <input type="text" formControlName="lastName" placeholder="Enter last name" />
+                                <div class="error-msgs" *ngIf="submitted && userData.lastName.errors">
+                                    <div *ngIf="userData.lastName.errors.required">This field is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="form-group">
+                        <label class="main-lbl">What is Person {{x+1}}'s sex?</label>
+                        <label class="field-lbl clear-a">
+                            <input type="radio" class="float-l checkbox" formControlName="sex" value="Male" />
+                            <span class="float-l">Male</span>
+                        </label>
+                        <label class="field-lbl clear-a">
+                            <input type="radio" class="float-l checkbox" formControlName="sex" value="Female" />
+                            <span class="float-l">Female</span>
+                        </label>
+                    </li>
+                </ol>
 
-            <!-- start loop from here -->
-            <ol *ngFor="let j of i(residents)">
-                <li class="form-group">
-                    <label class="main-lbl"><span class="required">*</span>Name</label>
-                    <input type="number" formControlName="name" placeholder="Ex:- 3" />
-                    <div class="error-msgs" *ngIf="submitted && userData.name.errors">
-                        <div *ngIf="userData.name.errors.required">This field is required.</div>
-                    </div>
-                </li>
-            </ol>
-        <!-- end loop -->
+                <div class="form-group btn-wrapper clear-a">
+                    <button *ngIf="isLast" type="submit" class="btn btn-primary float-r">Submit</button>
+                    <button *ngIf="!isLast" type="submit" class="btn btn-primary float-r">Fill Person {{x+2}} Details</button>
+                    <button type="reset" class="btn btn-reset float-l">Reset<span
+                            class="material-icons">cached</span></button>
+                </div>
+            </form>
+        </div>
 
-            <div class="form-group btn-wrapper clear-a">
-                <button type="submit" class="btn btn-primary float-r">Submit</button>
-                <button type="reset" class="btn btn-reset float-l">Reset<span class="material-icons">cached</span></button>
-            </div>
-        </form>
     </div>
 
     <div class="spinner-overlay" *ngIf="showSpinner">

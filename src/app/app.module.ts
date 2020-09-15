@@ -22,8 +22,8 @@ import { SecondFormComponent } from './components/survey-forms/second-form/secon
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

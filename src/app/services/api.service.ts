@@ -10,10 +10,12 @@ export class ApiService {
   userData = new BehaviorSubject({})// to store data which is using another component
   constructor(private http:HttpClient) { }
 
-  userLogin(name) {
+  personalData(firstName:string, lastName:string, sex:string) {
     const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' }
     var body ={
-      name:name
+      firstName:firstName,
+      lastName:lastName,
+      sex: sex
     }
     return this.http.post<any>('https://jsonplaceholder.typicode.com/posts', body, { headers }).
         pipe(

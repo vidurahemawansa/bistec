@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { userData } from '../../../models/user.details';
+import { Router } from '@angular/router';
+import { person } from '../../../models/user.details';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from '../../../services/api.service';
@@ -13,27 +14,30 @@ import { ApiService } from '../../../services/api.service';
 export class SecondFormComponent implements OnInit, OnDestroy {
   showSpinner:Boolean;
   userForm: FormGroup;
-  userDetails: userData;
+  personDetails: person;
   submitted = false;
   $unsubscribe = new Subject();
   basicData:any;
   residents:number;
   i = Array;
+  currentItem:number = 0;
 
-  constructor(private formBuilder:FormBuilder, private apiService:ApiService) { }
+  constructor(private formBuilder:FormBuilder, private apiService:ApiService, private router:Router) { }
 
   ngOnInit(): void {
     this.basicData = this.apiService.getFirstData();
     if(this.basicData.source._value && (this.basicData.source._value.noOfPeople > 0)){
       this.residents = this.basicData.source._value.noOfPeople;
     }else{
-      this.residents = 3; //TODO
+      this.router.navigateByUrl('/');
     }
     
     this.showSpinner=false;
     
     this.userForm = this.formBuilder.group({
-      name: ['', Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      sex:['']
     });
   }
   ngOnDestroy() {
@@ -47,14 +51,26 @@ export class SecondFormComponent implements OnInit, OnDestroy {
   submitForm() {
     this.showSpinner=true;
     this.submitted = true;
+    
     // stop if the form not validated
     if (this.userForm.invalid) {
+      this.showSpinner=false;
       return;
     } else {
-      this.userDetails = this.userForm.value;
-      this.apiService.setFirstData(this.userDetails);
-    }
+      if((this.currentItem + 1) < this.residents){
+        this.currentItem = this.currentItem + 1;
+      }
+      
+      this.personDetails = this.userForm.value;
+      this.apiService.personalData(this.personDetails.firstName, this.personDetails.lastName, this.personDetails.sex);
 
+      this.apiService.personalData(this.personDetails.firstName, this.personDetails.lastName, this.personDetails.sex)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe(data => {
+        this.showSpinner=false;
+        console.log(data);
+      });
+    }
   }
 
   saveToSession(){

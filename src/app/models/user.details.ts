@@ -4,3 +4,9 @@ export interface userData{
   ownedBy:string,
   telephone: string
 }
+
+export interface person{
+  firstName: string,
+  lastName: string,
+  sex:string
+}

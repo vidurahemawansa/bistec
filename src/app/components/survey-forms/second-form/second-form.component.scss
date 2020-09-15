@@ -62,11 +62,24 @@
     }
     .inner-wrapper{
         background: #fff;
-        padding: 10px 15px;
-        border: 1px solid #eee;
+        padding: 50px 15px 0px;
+        border: 1px solid #ddd;
+        position: relative;
         .info{
             font-size: 1.2em;
             color: #000;
+        }
+        h3{
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            padding: 0 10px 2px;
+            background: #02b875;
+            color: #ffff;
+            font-size: 1.5em;
+            text-transform: capitalize;
+            font-weight: normal;
+            line-height: 36px;
         }
         ol {
             list-style: none;
@@ -111,22 +124,30 @@
                         width: 20px;
                         height: 20px;
                         padding: 0;
-                        margin: 0;
+                        margin: 0 8px 0 0;
                     }
                 }
                 .field-lbl{
-                    margin: 0 0 12px 35px;
+                    margin: 0 0 5px 35px;
                     display: block;
-                    line-height: 16px;               
+                    line-height: 16px;
+                    font-family: $regFont;
                     span{
-                        width: calc(100% - 70px);
-                        margin: 1px 0 0 10px;
-                        font-family: $regFont;
+                        margin: 2px 0 0;
                     }
                 }
                 .error-msgs{
                     padding: 0 0 0 35px;
                     color: #ff0000;
+                }
+                .names-wrapper{
+                    .lbl-wrapper{
+                        width: 45%;
+                        input{
+                            width: 90%;
+                            font-family: $regFont;
+                        }
+                    }
                 }
             }
         }
